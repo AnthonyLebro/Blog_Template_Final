@@ -1,0 +1,4 @@
+<% provide(:page_title, "Edit #{@post.title}") %>
+<% provide(:user, 'active') %>
+
+<%= render 'form', post: @post, url: users_post_url(@post) %>

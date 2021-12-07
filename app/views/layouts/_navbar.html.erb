@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light">
+  <div class="container">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="/">Super<span class="light">Blog</span></a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+      <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+        <li class="nav-item">
+          <%= link_to 'Blog', root_path, class: "nav-link #{yield(:blog_active)}" %>
+        </li>
+        <% if user_signed_in? %>
+          <li class="nav-item dropdown user-nav">
+            <a class="nav-link dropdown-toggle <%= yield(:user) %>" href="" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= image_tag(current_user.gravatar_image_url) %>
+              <%= current_user.display_name.titleize %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <%= link_to 'My Posts', users_posts_path, class: "dropdown-item" %>
+              <%= link_to 'Account', users_account_path, class: "dropdown-item" %>
+              <%= link_to 'Log Out', destroy_user_session_path, method: :delete, class: "dropdown-item" %>
+            </div>
+          </li>
+        <% else %>
+          <li class="nav-item">
+            <%= link_to 'Log In', new_user_session_path, class: "nav-link #{yield(:login_active)}" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to 'Sign Up',new_user_registration_path, class: "nav-link #{yield(:signup_active)}" %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
